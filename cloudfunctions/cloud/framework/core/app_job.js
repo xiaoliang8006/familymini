@@ -13,7 +13,7 @@ class AppJob {
 	constructor() {
 		/* 当前需要执行的任务(name)
 		{
-			name:'名称',
+			name:'名称1',
 			mode:'模式 circle/时间点 point',
 			time:'时间点',
 		}*/
