@@ -18,19 +18,46 @@ class AdminSetupService extends BaseAdminService {
 		about,
 		aboutPic
 	}) {
+    // 参数校验
+    if (typeof about !== 'string' || about.trim().length === 0) {
+        throw new Error('关于我们内容不能为空');
+    }
 
-		this.AppError('此功能暂不开放，如有需要请加作者微信：cclinux0730');
+    // 构建更新数据
+    const data = {
+        SETUP_ABOUT: about.trim(),
+        SETUP_ABOUT_PIC: aboutPic,
+        SETUP_EDIT_TIME: Date.now()
+    };
+
+    // 更新数据库中的第一条记录
+    return await SetupModel.edit({}, data);
 	}
 
 	/** 联系我们设置 */
 	async setupContact({
-		address,
-		phone,
-		officePic,
-		servicePic,
+    phone,
+    address,
+    servicePic,
+		officePic
 	}) {
+		// 校验参数
+		if (typeof address !== 'string' || typeof phone !== 'string' || 
+			!Array.isArray(officePic) || !Array.isArray(servicePic)) {
+			throw new Error('参数格式不正确');
+		}
 
-		this.AppError('此功能暂不开放，如有需要请加作者微信：cclinux0730');
+		// 构建更新数据
+		const data = {
+			SETUP_ADDRESS: address,
+			SETUP_PHONE: phone,
+			SETUP_OFFICE_PIC: officePic,
+			SETUP_SERVICE_PIC: servicePic,
+			SETUP_EDIT_TIME: Date.now()
+		};
+
+		// 更新数据库
+		return await SetupModel.edit({}, data);
 	}
 
 	/** 小程序码 */

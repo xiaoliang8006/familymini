@@ -18,7 +18,25 @@ const UserModel = require('../../model/user_model.js');
 const NewsModel = require('../../model/news_model.js'); 
 
 class BaseAdminService extends BaseService {
-
+  generateTId() {
+    const now = new Date();
+    
+    // 获取日期部分 YYYYMMDD
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    
+    // 获取时间部分 HHmmss
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    
+    // 获取毫秒部分的后三位
+    const milliseconds = String(now.getMilliseconds()).padStart(3, '0').slice(0, 3);
+    
+    // 拼接成完整的时间戳
+    return `${year}${month}${day}${hours}${minutes}${seconds}${milliseconds}`;
+  }
 
 	/** 是否管理员 */
 	async isAdmin(token) {

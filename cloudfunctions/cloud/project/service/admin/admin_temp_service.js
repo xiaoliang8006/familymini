@@ -14,7 +14,7 @@ class AdminTempService extends BaseAdminService {
 		name,
 		times,
 	}) {
-		this.AppError('此功能暂不开放，如有需要请加作者微信：cclinux0730');
+		this.AppError('此功能暂不开放18，如有需要请加作者微信：cclinux0730');
 	}
 
 	/**更新数据 */
@@ -23,13 +23,13 @@ class AdminTempService extends BaseAdminService {
 		limit,
 		isLimit
 	}) {
-		this.AppError('此功能暂不开放，如有需要请加作者微信：cclinux0730');
+		this.AppError('此功能暂不开放19，如有需要请加作者微信：cclinux0730');
 	}
 
 
 	/**删除数据 */
 	async delTemp(id) {
-		this.AppError('此功能暂不开放，如有需要请加作者微信：cclinux0730');
+		this.AppError('此功能暂不开放20，如有需要请加作者微信：cclinux0730');
 	}
 
 

@@ -96,8 +96,26 @@ class AdminUserService extends BaseAdminService {
 
 
 	/**删除用户 */
-	async delUser(id) {
-		this.AppError('此功能暂不开放，如有需要请加作者微信：cclinux0730');
+	async delUser({id}) {
+    // 检查用户是否存在
+    let where = {
+			USER_MINI_OPENID: id
+		}
+    const user = await UserModel.getOne(where, '*');
+		if (!user) {
+			throw new Error('用户不存在');
+		}
+
+		// 删除用户相关的报名记录
+		await JoinModel.del({ JOIN_USER_ID: id });
+
+		// 删除用户
+    try {
+      return await UserModel.del({ USER_MINI_OPENID: id });
+    } catch (err) {
+        console.error('删除用户失败:', err);
+        throw new Error('删除用户失败：' + err.message);
+    }
 	}
 
 }

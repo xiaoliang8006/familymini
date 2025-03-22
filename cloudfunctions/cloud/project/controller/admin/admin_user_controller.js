@@ -76,26 +76,35 @@ class AdminUserController extends BaseAdminController {
 		return result;
 	} 
 
-	/** 删除用户 */
+	/** 
+	 * 删除用户
+	 * @returns {Promise<void>}
+	 */
 	async delUser() {
-		await this.isAdmin();
+		// 检查管理员权限
+	  await this.isAdmin();
 
-		// 数据校验
+		// 数据校验规则
 		let rules = {
 			id: 'required|id',
 		};
+    // 取得数据
+    let input = this.validateData(rules);
 
-		// 取得数据
-		let input = this.validateData(rules);
-
+		// 获取用户名用于日志记录
 		let name = await this.getNameBeforeLog('user', input.id);
-
-		let service = new AdminUserService();
-		await service.delUser(input.id);
-
-		this.log('删除了客户「' + name + '」', LogModel.TYPE.USER);
-
+    
+		// 执行删除操作
+		try {
+			let service = new AdminUserService();
+			await service.delUser({id: input.id});
+			// 记录操作日志
+			this.log('删除了客户「' + name + '」', LogModel.TYPE.USER);
+		} catch (err) {
+			throw new Error('删除用户失败：' + err.message);
+		}
 	}
+
 }
 
 module.exports = AdminUserController;

@@ -3,8 +3,8 @@
  	CLOUD_ID: 'cloud1-8gurvt7c33290834', //你的云环境id 
 
  	// #### 版本信息 
- 	VER: 'build 2022.02',
- 	COMPANY: '联系作者',
+ 	VER: 'build 2025.03',
+ 	COMPANY: '联系作者prec',
 
  	// #### 系统参数
  	PID: 'A00',
